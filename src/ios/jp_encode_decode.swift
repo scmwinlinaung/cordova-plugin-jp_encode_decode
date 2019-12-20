@@ -4,7 +4,7 @@ import UIKit
   @objc(EncodeWithSJIS:) // Declare your function name.
   func EncodeWithSJIS(command: CDVInvokedUrlCommand) { // write the function code.
             let encoder = JSONEncoder()
-            print("command.arguments![0] = ", command.arguments![0])
+    print("command.arguments![0] = ", command.argument(at: 0))
         do {
             let m = "販売名不明のインスリン製剤ブランク(空文字)".data(using: .shiftJIS)
             let SJISEncoded_json = try! JSONEncoder().encode(m)
@@ -13,7 +13,7 @@ import UIKit
             // let base64SJISEncoded = SJISEncoded_jsonString.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
             // Set the plugin result to succeed.
-                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: base64SJISEncoded);
+                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: SJISEncoded_jsonString);
             // Send the function result back to Cordova.
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         }
