@@ -1,0 +1,19 @@
+{
+    "name": "jp_encode_decode", 
+    "version": "0.0.1", 
+    "description": "To encode and decode Japanese Word using UTF8 and SJIS Format", 
+    "cordova": {
+      "id": "cordova-plugin-jp_encode_decode", 
+      "platforms": [ 
+        "ios" 
+      ]
+    },
+    "keywords": [ 
+      "cordova",
+      "camera",
+      "ecosystem:cordova",
+      "cordova-ios"
+    ],
+    "author": "winlinaung", 
+    "license": "MIT" 
+  }
