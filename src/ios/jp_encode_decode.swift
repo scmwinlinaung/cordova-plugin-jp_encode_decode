@@ -4,9 +4,10 @@ import UIKit
   @objc(EncodeWithSJIS:) // Declare your function name.
   func EncodeWithSJIS(command: CDVInvokedUrlCommand) { // write the function code.
             let encoder = JSONEncoder()
-    print("command.arguments![0] = ", command.argument(at: 0))
+    let text = command.argument(at: 0)
+        print("command.arguments![0] = ", command.argument(at: 0))
         do {
-            let m = "販売名不明のインスリン製剤ブランク(空文字)".data(using: .shiftJIS)
+            let m = text.data(using: .shiftJIS)
             let SJISEncoded_json = try! JSONEncoder().encode(m)
             let SJISEncoded_jsonString = String(data: SJISEncoded_json, encoding: .shiftJIS)!
             print("SJISEncoded_jsonString = ", SJISEncoded_jsonString)
