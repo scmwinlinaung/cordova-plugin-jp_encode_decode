@@ -10,7 +10,7 @@ import UIKit
             let SJISEncoded_json = try! JSONEncoder().encode(m)
             let SJISEncoded_jsonString = String(data: SJISEncoded_json, encoding: .shiftJIS)!
             print("SJISEncoded_jsonString = ", SJISEncoded_jsonString)
-            let base64SJISEncoded = SJISEncoded_jsonString.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
+            // let base64SJISEncoded = SJISEncoded_jsonString.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
             // Set the plugin result to succeed.
                 pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: base64SJISEncoded);
