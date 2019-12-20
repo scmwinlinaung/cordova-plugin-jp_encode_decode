@@ -10,7 +10,9 @@ jp_encode_decode.EncodeWithSJIS = function(Data, onSuccess, onError) {
    Data = Data || {};
    Data.text =  Data.text 
    Data.csvEncodedData = Data.csvEncodedData || ""
-   console.log("Data = ", Data.text)
+   console.log("Data = ", Data)
+   console.log("Data.text = ", Data.text)
+   console.log("Data.csvEncodedData = ", Data.csvEncodedData)
    exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data.text, Data.csvEncodedData]);
 };
 
