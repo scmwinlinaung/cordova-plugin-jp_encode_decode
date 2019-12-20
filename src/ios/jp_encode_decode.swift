@@ -4,7 +4,7 @@ import UIKit
   @objc(EncodeWithSJIS:) // Declare your function name.
   func EncodeWithSJIS(command: CDVInvokedUrlCommand) { // write the function code.
             let encoder = JSONEncoder()
-    let text = command.argument(at: 0)
+    let text: String = command.argument(at: 0) as! String
         print("command.arguments![0] = ", command.argument(at: 0))
         do {
             let m = text.data(using: .shiftJIS)
