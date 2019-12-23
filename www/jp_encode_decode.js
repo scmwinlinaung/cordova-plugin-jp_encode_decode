@@ -8,7 +8,11 @@ var jp_encode_decode = function() {}; // This just makes it easier for
 // Note: We are not passing any options in the [] block for this, so make sure you include the empty [] block.
 jp_encode_decode.EncodeWithSJIS = function(onSuccess, onError, Data) {
    Data = Data;
-   exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data]);
+   Data.text = Data.text
+   Data.csvFileName = Data.csvFileName
+   console.log("Data.text = ", Data.text)
+   console.log("Data.csvFileName = ",Data.csvFileName)
+   exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data.text, Data.csvFileName]);
 };
 jp_encode_decode.DecodeWithSJISAndEncodeWithUTF8 = function(onSuccess, onError, Data) {
    console.log("Data from DecodeWithSJISAndEncodeWithUTF8 = ", Data[0])
