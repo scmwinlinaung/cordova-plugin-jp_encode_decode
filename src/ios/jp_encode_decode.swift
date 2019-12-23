@@ -25,7 +25,7 @@ import UIKit
     @objc(createCSVWithSJIS:)
     func createCSVWithSJIS(command: CDVInvokedUrlCommand) {
         var text: String = command.argument(at: 0) as! String
-        
+        var csvFileName: String = command.argument(at: 1) as! String
         var text_sjis = text.data(using: .shiftJIS)
         var str_sjis: String = String(data: text_sjis!, encoding: .shiftJIS)!
         print("str_sjis 1 = ", str_sjis)
