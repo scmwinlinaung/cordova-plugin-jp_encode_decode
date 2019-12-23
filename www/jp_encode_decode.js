@@ -9,7 +9,8 @@ var jp_encode_decode = function() {}; // This just makes it easier for
 jp_encode_decode.EncodeWithSJIS = function(Data, onSuccess, onError) {
    Data = Data;
    console.log("Data = ", Data)
-
+   console.log("onSucess = ", onSuccess)
+   console.log("onError = ", onError)
    exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data, 78]);
 };
 
