@@ -43,16 +43,16 @@ import UIKit
                 let UTF8Encode_jsonString = String(data: UTF8Encode_json, encoding: .utf8)
                 print("UTF8Encode_jsonString = ", UTF8Encode_jsonString)
                 
-                let base64UTF8Encoded =  UTF8Encode_jsonString!.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
-                let UTF8DecodedData = Data(base64Encoded: base64UTF8Encoded)
-                let UTF8DecodedString = String(data: UTF8DecodedData!, encoding: .utf8)!
-                print("UTF8DecodedString = ", UTF8DecodedString)
+                // let base64UTF8Encoded =  UTF8Encode_jsonString!.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
+                // let UTF8DecodedData = Data(base64Encoded: base64UTF8Encoded)
+                // let UTF8DecodedString = String(data: UTF8DecodedData!, encoding: .utf8)!
+                // print("UTF8DecodedString = ", UTF8DecodedString)
                 
-                var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-                // Set the plugin result to succeed.
-                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: UTF8DecodedString);
-                // Send the function result back to Cordova.
-                self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+                // var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+                // // Set the plugin result to succeed.
+                // pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: UTF8DecodedString);
+                // // Send the function result back to Cordova.
+                // self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
             }
             
         }
