@@ -11,9 +11,8 @@ jp_encode_decode.EncodeWithSJIS = function(onSuccess, onError, Data) {
 
    exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data]);
 };
-jp_encode_decode.DecodeWithSJISAndEncodeWithUTF8 = function(onSuccess, onError, Data) {
-   console.log("Data from DecodeWithSJISAndEncodeWithUTF8 = ", Data[0])
-   exec(onSuccess, onError, PLUGIN_NAME, "DecodeWithSJISAndEncodeWithUTF8", [Data]);
+jp_encode_decode.DecodeWithSJISAndEncodeWithUTF8 = function(onSuccess, onError) {
+   exec(onSuccess, onError, PLUGIN_NAME, "DecodeWithSJISAndEncodeWithUTF8", []);
 };
 jp_encode_decode.createCSVWithSJIS = function(onSuccess, onError, Data) {
    console.log("Data  = ", )

@@ -15,9 +15,19 @@ import UIKit
     }
     @objc(DecodeWithSJISAndEncodeWithUTF8:)
     func DecodeWithSJISAndEncodeWithUTF8(command: CDVInvokedUrlCommand) {
-        let text: String = command.argument(at: 0) as! String
-        var text_utf8 = text.data(using: .utf8)
-        var str_utf8: String = String(data: text_utf8!, encoding: .utf8)!
+        var url = UserDefaults.standard.url(forKey: "ios_url")
+        var fileUrl: String = url!.absoluteString
+        var csvLines = [String]()
+        var str_utf8: String
+        do {
+            let csvString = try String(contentsOfFile: fileUrl, encoding: String.Encoding.shiftJIS)
+            var text_utf8 = csvString.data(using: .utf8)
+            str_utf8 = String(data: text_utf8!, encoding: .utf8)!
+            
+        } catch let error as NSError {
+            print("err = \(error)")
+            return
+        }
         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_utf8);
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
@@ -32,7 +42,7 @@ import UIKit
         
         do {
             var path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil , create: false )
-            var fileURL = path.appendingPathComponent("shiftJIS.csv")
+            var fileURL = path.appendingPathComponent("/AE report/" + csvFileName)
             try str_sjis.write(to: fileURL, atomically: true , encoding: .shiftJIS)
         } catch {
             print("error creating file")
