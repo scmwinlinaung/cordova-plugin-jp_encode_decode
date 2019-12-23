@@ -4,10 +4,15 @@ import UIKit
   @objc(EncodeWithSJIS:) // Declare your function name.
   func EncodeWithSJIS(command: CDVInvokedUrlCommand) { // write the function code.
             let encoder = JSONEncoder()
-    let text: String = command.argument(at: 0) as! String
-        print("command.arguments![0] = ", command.argument(at: 0))
+
+        if command.argument(at: 1) {
+            print("Command 1 = ", command.argument(at: 1))
+        }
+        if  command.argument(at: 0) {
+             print("Command 0 = ", command.argument(at: 0))
+        }
         do {
-            let m = text.data(using: .shiftJIS)
+            let m = "Command".data(using: .shiftJIS)
             let SJISEncoded_json = try! JSONEncoder().encode(m)
             let SJISEncoded_jsonString = String(data: SJISEncoded_json, encoding: .shiftJIS)!
             print("SJISEncoded_jsonString = ", SJISEncoded_jsonString)

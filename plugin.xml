@@ -12,7 +12,7 @@
         <config-file target="config.xml" parent="/*">
 
             <feature name="jp_encode_decode">
-                <param name="ios-package" value="CDVjp_encode_decode" />
+                <param name="ios-package" value="jp_encode_decode" />
                  <param name="onload" value="true" />
             </feature>
         </config-file>
