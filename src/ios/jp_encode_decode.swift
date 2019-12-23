@@ -15,23 +15,43 @@ import UIKit
     }
     @objc(DecodeWithSJISAndEncodeWithUTF8:)
     func DecodeWithSJISAndEncodeWithUTF8(command: CDVInvokedUrlCommand) {
-        var url = UserDefaults.standard.url(forKey: "ios_url")
-        var fileUrl: String = url!.absoluteString
-        var csvLines = [String]()
-        var str_utf8: String
+        
+        var url: URL = UserDefaults.standard.url(forKey: "ios_url")!
+        print("url ", url)
+        var fileUrl: String = url.absoluteString
+        print("fileUrl = ", fileUrl)
         do {
-            let csvString = try String(contentsOfFile: fileUrl, encoding: String.Encoding.shiftJIS)
-            var text_utf8 = csvString.data(using: .utf8)
-            str_utf8 = String(data: text_utf8!, encoding: .utf8)!
-            
-        } catch let error as NSError {
-            print("err = \(error)")
-            return
+            var path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil , create: false )
+            print("path = ", path)
         }
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_utf8);
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        catch {
+            print("error creating file")
+        }
+        if (url != nil) {
+            var csvLines = [String]()
+            var str_utf8: String
+            do {
+                
+                let csvString = try String(contentsOfFile: fileUrl, encoding: String.Encoding.shiftJIS)
+                print("csvString ", csvString)
+                var text_utf8 = csvString.data(using: .utf8)
+                str_utf8 = String(data: text_utf8!, encoding: .utf8)!
+                print("str_utf8 ", str_utf8)
+                
+            } catch let error as NSError {
+                print("err = \(error)")
+                return
+            }
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_utf8);
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        } else {
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "");
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        }
     }
+    
     @objc(createCSVWithSJIS:)
     func createCSVWithSJIS(command: CDVInvokedUrlCommand) {
         var text: String = command.argument(at: 0) as! String
@@ -51,5 +71,21 @@ import UIKit
         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_sjis);
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+    
+    @objc(getFileUrl:) // Declare your function name.
+    func getFileUrl(command: CDVInvokedUrlCommand) {
+        var fileUrl: URL
+        fileUrl = UserDefaults.standard.url(forKey: "ios_url")!
+        print("Ios_url from storage = ", fileUrl)
+        if fileUrl != nil {
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: fileUrl.absoluteString)
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        } else {
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "")
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        }
     }
 }
