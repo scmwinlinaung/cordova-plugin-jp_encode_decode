@@ -13,6 +13,6 @@ jp_encode_decode.EncodeWithSJIS = function(onSuccess, onError, Data) {
 jp_encode_decode.DecodeWithSJISAndEncodeWithUTF8 = function(onSuccess, onError, Data) {
    console.log("Data from DecodeWithSJISAndEncodeWithUTF8 = ", Data[0])
    exec(onSuccess, onError, PLUGIN_NAME, "DecodeWithSJISAndEncodeWithUTF8", [Data]);
-}
+};
 
 module.exports = jp_encode_decode;
