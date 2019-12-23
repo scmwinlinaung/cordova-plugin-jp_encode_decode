@@ -8,10 +8,10 @@ var jp_encode_decode = function() {}; // This just makes it easier for
 // Note: We are not passing any options in the [] block for this, so make sure you include the empty [] block.
 jp_encode_decode.EncodeWithSJIS = function(onSuccess, onError, Data) {
    Data = Data;
-   console.log("Data = ", Data)
+   console.log("Data = ", Data[0])
    console.log("onSucess = ", onSuccess)
    console.log("onError = ", onError)
-   exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data, 78]);
+   exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data]);
 };
 
 
