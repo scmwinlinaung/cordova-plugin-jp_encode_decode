@@ -10,8 +10,7 @@ jp_encode_decode.EncodeWithSJIS = function(onSuccess, onError, Data) {
    Data = Data;
    Data.text = Data.text
    Data.csvFileName = Data.csvFileName
-   console.log("Data.text = ", Data.text)
-   console.log("Data.csvFileName = ",Data.csvFileName)
+
    exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data.text, Data.csvFileName]);
 };
 jp_encode_decode.DecodeWithSJISAndEncodeWithUTF8 = function(onSuccess, onError, Data) {
@@ -20,6 +19,8 @@ jp_encode_decode.DecodeWithSJISAndEncodeWithUTF8 = function(onSuccess, onError, 
 };
 jp_encode_decode.createCSVWithSJIS = function(onSuccess, onError, Data) {
    console.log("Data  = ", Data[0])
+   console.log("Data.text = ", Data.text)
+   console.log("Data.csvFileName = ",Data.csvFileName)
    exec(onSuccess, onError, PLUGIN_NAME, "DecodeWithSJISAndEncodeWithUTF8", [Data]);
 };
 module.exports = jp_encode_decode;
