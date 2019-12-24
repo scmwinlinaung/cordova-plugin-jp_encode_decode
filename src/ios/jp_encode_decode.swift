@@ -7,50 +7,27 @@ import UIKit
         
         var text_sjis = text.data(using: .shiftJIS)
         var str_sjis: String = String(data: text_sjis!, encoding: .shiftJIS)!
-        print("str_sjis = ", str_sjis)
-        
         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_sjis);
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
-    @objc(DecodeWithSJISAndEncodeWithUTF8:)
-    func DecodeWithSJISAndEncodeWithUTF8(command: CDVInvokedUrlCommand) {
-        
-        var url: URL = UserDefaults.standard.url(forKey: "ios_url")!
-        print("url ", url)
-        var fileUrl: String = url.absoluteString
-        print("fileUrl = ", fileUrl)
-        do {
-            var path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil , create: false )
-            print("path = ", path)
-        }
-        catch {
-            print("error creating file")
-        }
-        if (url != nil) {
-            var csvLines = [String]()
-            var str_utf8: String
-            do {
-                
-                let csvString = try String(contentsOfFile: fileUrl, encoding: String.Encoding.shiftJIS)
-                print("csvString ", csvString)
-                var text_utf8 = csvString.data(using: .utf8)
-                str_utf8 = String(data: text_utf8!, encoding: .utf8)!
-                print("str_utf8 ", str_utf8)
-                
-            } catch let error as NSError {
-                print("err = \(error)")
-                return
-            }
+    @objc(readCsvAndEncodeWithUTF8:)
+    func readCsvAndEncodeWithUTF8(command: CDVInvokedUrlCommand) {
+        if  (UserDefaults.standard.string(forKey: "csv_data") != "" && UserDefaults.standard.string(forKey: "csv_data") != nil) {
+            var csv_data = UserDefaults.standard.string(forKey: "csv_data")!
+            var text_utf8 = csv_data.data(using: .utf8)
+            var str_utf8: String = String(data: text_utf8!, encoding: .utf8)!
+
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_utf8);
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
-        } else {
+        } else{
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "");
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         }
     }
+    
     
     @objc(createCSVWithSJIS:)
     func createCSVWithSJIS(command: CDVInvokedUrlCommand) {
@@ -58,8 +35,6 @@ import UIKit
         var csvFileName: String = command.argument(at: 1) as! String
         var text_sjis = text.data(using: .shiftJIS)
         var str_sjis: String = String(data: text_sjis!, encoding: .shiftJIS)!
-        print("str_sjis 1 = ", str_sjis)
-        
         do {
             var path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil , create: false )
             var fileURL = path.appendingPathComponent("/AE report/" + csvFileName)
@@ -73,11 +48,10 @@ import UIKit
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
     
-    @objc(getFileUrl:) // Declare your function name.
+    @objc(getFileUrl:)
     func getFileUrl(command: CDVInvokedUrlCommand) {
         var fileUrl: URL
         fileUrl = UserDefaults.standard.url(forKey: "ios_url")!
-        print("Ios_url from storage = ", fileUrl)
         if fileUrl != nil {
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: fileUrl.absoluteString)
