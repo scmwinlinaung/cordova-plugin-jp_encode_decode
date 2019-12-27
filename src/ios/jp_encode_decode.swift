@@ -7,7 +7,6 @@ import UIKit
             let csv_data = UserDefaults.standard.string(forKey: "csv_data")!
             let text_utf8 = csv_data.data(using: .utf8)
             let str_utf8: String = String(data: text_utf8!, encoding: .utf8)!
-
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: str_utf8);
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
