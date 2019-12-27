@@ -1,23 +1,12 @@
 var exec = require('cordova/exec');
 
-var PLUGIN_NAME = "jp_encode_decode"; // This is just for code completion uses.
+var PLUGIN_NAME = "jp_encode_decode";
 
-var jp_encode_decode = function() {}; // This just makes it easier for
- // us to export all of the functions at once.
-// All of your plugin functions go below this. 
-// Note: We are not passing any options in the [] block for this, so make sure you include the empty [] block.
-jp_encode_decode.EncodeWithSJIS = function(onSuccess, onError, Data) {
-   Data = Data;
-
-   exec(onSuccess, onError, PLUGIN_NAME, "EncodeWithSJIS", [Data]);
-};
+var jp_encode_decode = function() {};
 jp_encode_decode.readCsvAndEncodeWithUTF8 = function(onSuccess, onError) {
    exec(onSuccess, onError, PLUGIN_NAME, "readCsvAndEncodeWithUTF8", []);
 };
 jp_encode_decode.createCSVWithSJIS = function(onSuccess, onError, Data) {
    exec(onSuccess, onError, PLUGIN_NAME, "createCSVWithSJIS", [Data.text, Data.csvFileName]);
 };
-jp_encode_decode.getFileUrl = function(onSuccess, onError) {
-   exec(onSuccess, onError, PLUGIN_NAME, "getFileUrl", []);
-}
 module.exports = jp_encode_decode;
