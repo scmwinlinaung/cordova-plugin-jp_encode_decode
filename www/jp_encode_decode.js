@@ -7,6 +7,6 @@ jp_encode_decode.readCsvAndEncodeWithUTF8 = function(onSuccess, onError) {
    exec(onSuccess, onError, PLUGIN_NAME, "readCsvAndEncodeWithUTF8", []);
 };
 jp_encode_decode.createCSVWithSJIS = function(onSuccess, onError, Data) {
-   exec(onSuccess, onError, PLUGIN_NAME, "createCSVWithSJIS", [Data.text, Data.csvFileName]);
+   exec(onSuccess, onError, PLUGIN_NAME, "createCSVWithSJIS", [Data.text, Data.csvFolderName, Data.csvFileName]);
 };
 module.exports = jp_encode_decode;
