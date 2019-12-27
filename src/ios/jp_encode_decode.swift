@@ -16,7 +16,7 @@ import UIKit
             let path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil , create: false )
             let fileURL = path.appendingPathComponent(csvFolderName + csvFileName)
             try str_sjis.write(to: fileURL, atomically: true , encoding: .shiftJIS)
-        } catch(error) {
+        } catch {
             print("createCSVWithSJIS error ", error)
         }
         
@@ -31,7 +31,7 @@ import UIKit
         if  (UserDefaults.standard.string(forKey: "csv_data") != "" && UserDefaults.standard.string(forKey: "csv_data") != nil) {
             let csv_data = UserDefaults.standard.string(forKey: "csv_data")!
             let text_utf8 = csv_data.data(using: .utf8)
-            returnMessage: String = String(data: text_utf8!, encoding: .utf8)!
+            returnMessage = String(data: text_utf8!, encoding: .utf8)!
         }
 
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: returnMessage);
