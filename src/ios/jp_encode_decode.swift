@@ -1,7 +1,6 @@
 import UIKit
 
 @objc(jp_encode_decode) class jp_encode_decode : CDVPlugin {
-
     @objc(createCSVWithSJIS:)
     func createCSVWithSJIS(command: CDVInvokedUrlCommand) { 
         var returnMessage = "";
@@ -36,6 +35,7 @@ import UIKit
 
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: returnMessage);
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        UserDefaults.standard.removeObject(forKey: "csv_data")
     }
 
 }
